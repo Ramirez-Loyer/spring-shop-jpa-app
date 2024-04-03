@@ -17,6 +17,7 @@ public class Article implements Serializable {
 	private String description;
 	private double price;
 
+
 	@ManyToOne
 	private Category category; 			//plusieurs articles sont liés à une suele categorie
 	
@@ -38,6 +39,16 @@ public class Article implements Serializable {
 		this.price = price;
 		
 	}
+
+
+	public Article(String brand, String description, double price, Category category) {
+		this.brand= brand;
+		this.description = description;
+		this.price = price;
+		this.category= category;
+	}
+
+
 
 
 	public Long getId() {
@@ -82,7 +93,7 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", brand=" + brand + ", description=" + description + ", price=" + price + "]";
+		return "Article [id=" + id + ", brand=" + brand + ", description=" + description + ", price=" + price +  "]";
 	}
 	
 	

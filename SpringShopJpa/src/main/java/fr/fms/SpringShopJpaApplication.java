@@ -28,13 +28,30 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		
 		//categoryRepository.save(new Category("Smartphone"));
 		
-		//for(Article article : articleRepository.findByBrandAndPrice("Samsung", 250)) {
-			//System.out.println(article);
+				//for(Article article : articleRepository.findByBrandAndPrice("Samsung", 250)) {
+					//System.out.println(article);
+				
+				//for(Article article : articleRepository.searchArticles("sung", 250)) {
+					//System.out.println(article);
 		
-		for(Article article : articleRepository.searchArticles("sung", 250)) {
+		
+		/*Category smartphone = categoryRepository.save(new Category ("Smartphone"));
+		Category tablet = categoryRepository.save(new Category("Tablet"));
+		Category pc = categoryRepository.save(new Category("PC"));
+		
+		articleRepository.save(new Article("Samsung", "S10", 500, smartphone));
+		articleRepository.save(new Article("Samsung", "S9", 350, smartphone));
+		articleRepository.save(new Article("Xiaomi", "MI10",  100, smartphone));
+		
+		articleRepository.save(new Article("Samsung", "GalaxyTab", 450, tablet));
+		articleRepository.save(new Article("Apple", "IPad",  350, tablet));
+		
+		articleRepository.save(new Article("Asus", "R510", 600, pc));*/
+		
+		
+		for(Article article : articleRepository.findByCategoryId(2L)) {
 			System.out.println(article);
 		}
-		
 	}
 
 }

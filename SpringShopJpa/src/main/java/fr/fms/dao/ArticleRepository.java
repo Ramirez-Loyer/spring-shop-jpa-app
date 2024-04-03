@@ -15,4 +15,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
 	
 	@Query ("select A from Article A where A.brand like %:x% and A.price > :y")
 	public List<Article> searchArticles(@Param("x") String kw, @Param("y") double price);
+	
+	
+	public List<Article> findByCategoryId(Long categoryId);
 }
