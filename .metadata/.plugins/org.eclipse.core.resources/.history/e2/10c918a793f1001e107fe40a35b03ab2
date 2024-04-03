@@ -1,0 +1,7 @@
+package fr.fms.dao;
+
+import fr.fms.entities.User;
+
+public interface UserDao extends IEntityDao<User, Integer> {
+
+}
