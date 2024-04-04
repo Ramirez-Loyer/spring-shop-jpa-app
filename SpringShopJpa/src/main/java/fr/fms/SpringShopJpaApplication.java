@@ -1,5 +1,8 @@
 package fr.fms;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -49,15 +52,30 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		articleRepository.save(new Article("Asus", "R510", 600, pc));*/
 		
 		
-		for(Article article : articleRepository.findByCategoryId(2L)) {
+		for(Article article : articleRepository.findByCategoryId((long) 2)) {
 			System.out.println(article);
 		}
 		
+		
+		//Afficher tous les articles
 		for(Article article : articleRepository.findAll()) {
 			System.out.println(article);
 		}
 		
+		//Afficher tous les articles(lambda)
+		articleRepository.findAll().forEach(article -> System.out.println(article));
+	
+		//Afficher un article 
+		Optional<Article> article = articleRepository.findById((long) 3); 
+			System.out.println(article);
+		
+		
+		
+		    
+		    
+		    
 		
 	}
-
 }
+
+
