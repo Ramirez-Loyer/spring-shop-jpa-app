@@ -35,8 +35,14 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
 	
 	@Transactional
 	@Modifying 
-	@Query ("update Article A set A.brand = :brand, A.description =:description, A.price =:price, A.category =:category where A.id=:id")
-	public void updateArticle(@Param("id")Long id,  @Param("brand")String brand, @Param("description")String description, @Param("price")double price, @Param("category")Optional<Category> category );
-        
+	@Query ("update Article A set A.brand = :brand, A.description =:description, A.price =:price where A.id=:id")
+	public void updateArticle(@Param("id")Long id,  @Param("brand")String brand, @Param("description")String description, @Param("price")double price );
+	
+	
+	@Query("SELECT c FROM Category c ORDER BY c.name ASC, c.name DESC")
+	public List<Category>findByOrderByName(@Param("name")String name);
+   
+	
+	
 
 }

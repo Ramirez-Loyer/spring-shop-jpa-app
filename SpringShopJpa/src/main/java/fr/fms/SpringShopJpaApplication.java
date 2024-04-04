@@ -52,7 +52,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		articleRepository.save(new Article("Asus", "R510", 600, pc));*/
 		
 		
-		//Afficher par catégorie
+		/*//Afficher par catégorie
 		for(Article article : articleRepository.findByCategoryId((long) 2)) {
 			System.out.println(article);
 		}
@@ -76,16 +76,32 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 			System.out.println(article); 
 		}
 		
-		/*//Supprimer un article à partir de l'id
+		//Supprimer un article à partir de l'id
 		articleRepository.deleteById((long) 6); {
 			System.out.println(article); 
 		}*/
 		
 		//Permettre de mettre à jour un article à partir de l'id
-	  Optional<Category> smartphone = categoryRepository.findById((long) 1);
-	    
-		articleRepository.updateArticle((long) 3, "Xiaomi", "MI1000", 20, smartphone);
+	  //Optional<Category> smartphone = categoryRepository.findById((long) 20);
+		Optional<Article> article = articleRepository.findById((long) 3); 
+		if (article.isPresent()) {
+			article.get().setBrand("Apple");
+			articleRepository.updateArticle(article.get().getId(), article.get().getBrand(), article.get().getDescription(), article.get().getPrice());
+		}
+		
+		
+		//Afficher les noms des catégories classés par ordre croissant puis décroissant
+		for(Category  category : categoryRepository.findByOrderByNameAsc()) {
+			System.out.println(category);
+		}; 
+		
+		for(Category category : categoryRepository.findByOrderByNameDesc()) {
+			 System.out.println(category);
+			 }
+		}
+			
+		
 }
-}
+
 
 
