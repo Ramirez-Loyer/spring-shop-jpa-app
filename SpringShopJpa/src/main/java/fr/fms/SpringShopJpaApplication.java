@@ -52,6 +52,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		articleRepository.save(new Article("Asus", "R510", 600, pc));*/
 		
 		
+		//Afficher par catégorie
 		for(Article article : articleRepository.findByCategoryId((long) 2)) {
 			System.out.println(article);
 		}
@@ -73,7 +74,12 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		//tous les articles contenant telle description et telle marque
 		articleRepository.findByDescriptionAndBrand("Ipad", "Apple"); {
 			System.out.println(article); 
-		    }
+		}
+		
+		//Supprimer un article à partir de l'id
+		articleRepository.deleteById((long) 6); {
+			System.out.println(article); 
+		}
 		
 		
 		
