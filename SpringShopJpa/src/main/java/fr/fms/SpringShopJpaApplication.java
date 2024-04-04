@@ -76,14 +76,15 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 			System.out.println(article); 
 		}
 		
-		//Supprimer un article à partir de l'id
+		/*//Supprimer un article à partir de l'id
 		articleRepository.deleteById((long) 6); {
 			System.out.println(article); 
-		}
+		}*/
 		
-		
-		
-		
+		//Permettre de mettre à jour un article à partir de l'id
+	  Optional<Category> smartphone = categoryRepository.findById((long) 1);
+	    
+		articleRepository.updateArticle((long) 3, "Xiaomi", "MI1000", 20, smartphone);
 }
 }
 

@@ -3,11 +3,15 @@ package fr.fms.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import fr.fms.entities.Article;
+import fr.fms.entities.Category;
 
 public interface ArticleRepository extends JpaRepository<Article, Long>{
 	public List<Article> findByBrand(String brand);
@@ -28,5 +32,11 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
 	
 	
 	public void deleteById(long articleId);
+	
+	@Transactional
+	@Modifying 
+	@Query ("update Article A set A.brand = :brand, A.description =:description, A.price =:price, A.category =:category where A.id=:id")
+	public void updateArticle(@Param("id")Long id,  @Param("brand")String brand, @Param("description")String description, @Param("price")double price, @Param("category")Optional<Category> category );
+        
 
 }
