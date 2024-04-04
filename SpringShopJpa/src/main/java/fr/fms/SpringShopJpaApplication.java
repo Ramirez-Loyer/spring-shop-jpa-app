@@ -83,7 +83,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		
 		//Permettre de mettre à jour un article à partir de l'id
 	  //Optional<Category> smartphone = categoryRepository.findById((long) 20);
-		Optional<Article> article = articleRepository.findById((long) 3); 
+		/*Optional<Article> article = articleRepository.findById((long) 3); 
 		if (article.isPresent()) {
 			article.get().setBrand("Apple");
 			articleRepository.updateArticle(article.get().getId(), article.get().getBrand(), article.get().getDescription(), article.get().getPrice());
@@ -98,9 +98,21 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		for(Category category : categoryRepository.findByOrderByNameDesc()) {
 			 System.out.println(category);
 			 }
+		*/
+	
+	
+		//Ajouter une méthode de mon choix - existsById
+		Long id = (long) 15;
+		if(articleRepository.existsById(id)) {
+			System.out.println("Oui, ça existe!");
+		} 
+		else {
+				System.out.println("Dommage, ça n'existe pas!");
+			}
 		}
-			
-		
+
+	
+
 }
 
 
