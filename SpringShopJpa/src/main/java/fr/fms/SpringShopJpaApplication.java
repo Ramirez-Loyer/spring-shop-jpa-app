@@ -33,7 +33,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		
 				//for(Article article : articleRepository.findByBrandAndPrice("Samsung", 250)) {
 					//System.out.println(article);
-				
+		
 				//for(Article article : articleRepository.searchArticles("sung", 250)) {
 					//System.out.println(article);
 		
@@ -70,12 +70,15 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 			System.out.println(article);
 		
 		
+		//tous les articles contenant telle description et telle marque
+		articleRepository.findByDescriptionAndBrand("Ipad", "Apple"); {
+			System.out.println(article); 
+		    }
 		
-		    
-		    
-		    
 		
-	}
+		
+		
+}
 }
 
 

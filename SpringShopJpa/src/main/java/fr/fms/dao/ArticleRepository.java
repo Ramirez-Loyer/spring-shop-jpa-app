@@ -23,6 +23,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
 	
 	public Optional<Article> findById(Long articleId);
 	
+
+	public List<Article> findByDescriptionAndBrand(String description, String brand);
 	
 	
 
