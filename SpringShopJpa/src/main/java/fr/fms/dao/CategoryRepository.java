@@ -12,8 +12,8 @@ import fr.fms.entities.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 	
-	public List<Category>findByOrderByNameAsc();
-	public List<Category>findByOrderByNameDesc();
+	/*public List<Category>findByOrderByNameAsc();
+	public List<Category>findByOrderByNameDesc();*/
 
 
 	

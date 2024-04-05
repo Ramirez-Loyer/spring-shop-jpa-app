@@ -14,6 +14,11 @@ import fr.fms.entities.Article;
 import fr.fms.entities.Category;
 
 public interface ArticleRepository extends JpaRepository<Article, Long>{
+	
+	
+	
+	
+
 	public List<Article> findByBrand(String brand);
 	public List<Article> findByBrandContains(String brand);
 	public List<Article> findByBrandAndPrice(String brand, double price);
@@ -33,10 +38,12 @@ public interface ArticleRepository extends JpaRepository<Article, Long>{
 	
 	public void deleteById(long articleId);
 	
+
 	@Transactional
 	@Modifying 
 	@Query ("update Article A set A.brand = :brand, A.description =:description, A.price =:price where A.id=:id")
 	public void updateArticle(@Param("id")Long id,  @Param("brand")String brand, @Param("description")String description, @Param("price")double price );
+
 	
 	
 	
