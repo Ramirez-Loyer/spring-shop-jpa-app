@@ -62,6 +62,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 						System.out.println("Affichage de tous les articles avec pagination");
 					break;	
 				case 3 : 
+						System.out.println("Ajouter un article");
 						System.out.println("Marque : "); String brandAdd = scan.nextLine();
 						System.out.println("Description : "); String descriptionAdd = scan.nextLine();
 						System.out.println("Prix : "); double priceAdd = scan.nextDouble();
@@ -81,8 +82,15 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 						}
 					break;						
 				case 5 : 
-						System.out.println("Id de l'article à supprimer : ");
-						//articleRepository.deleteById();
+						System.out.println("Entrez l'id de l'article à supprimer : ");
+						Long articleIdtoDelete = scan.nextLong();
+						Optional<Article> articleToDelete = articleRepository.findById(articleIdtoDelete);
+						if(articleToDelete.isPresent()) {
+							articleRepository.deleteById(articleIdtoDelete);
+							System.out.println("L'article avec l'ID " + articleIdtoDelete+ "a été supprimé");
+						} else {
+							System.out.println("Aucun article trouvé avec l'id donné");
+						}
 					break;
 				case 6 : 
 					System.out.println("Modifier un article");
