@@ -44,8 +44,9 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		articleRepository.save(new Article("Motorola", "Moto E13", 100, smartphone));
 		
 		
-		
-		System.out.println("Bienvenu dans notre application de gestion d'articles ! Vivement la couche web parce que...");
+		System.out.println("------------------------------------------------------- ");
+		System.out.println("Bienvenu dans notre application de gestion d'articles ! ");
+		System.out.println("------------------------------------------------------- ");
 		
 		Scanner scan = new Scanner(System.in);
 		
@@ -65,17 +66,23 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 						System.out.println("Description : "); String descriptionAdd = scan.nextLine();
 						System.out.println("Prix : "); double priceAdd = scan.nextDouble();
 						System.out.println("Category : "); String categoryAdd = scan.nextLine();
-						Category cat = categoryAdd.equals("pc") ? pc : catAdd.equals("tablet") ? tablet : catAdd.equals("smartphone") ? smartphone;
+						Category cat = categoryAdd.equals("pc") ? pc : categoryAdd.equals("tablet") ? tablet : categoryAdd.equals("smartphone") ? smartphone : null;
 						articleRepository.save(new Article(brandAdd, descriptionAdd, priceAdd, cat));
 					break;					
 				case 4 : 
 						System.out.println("Afficher un article par id : ");
-						String art = scan.nextLine();
-						articleRepository.findById();
+						Long articleId = scan.nextLong();
+						Optional<Article> displayArticle = articleRepository.findById(articleId);
+						if(displayArticle.isPresent()) {
+							
+							System.out.println(displayArticle.get());
+						} else {
+							System.out.println("Cet id n'existe pas");
+						}
 					break;						
 				case 5 : 
 						System.out.println("Id de l'article à supprimer : ");
-						articleRepository.deleteById();
+						//articleRepository.deleteById();
 					break;
 				case 6 : 
 					System.out.println("Modifier un article");
@@ -86,7 +93,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 					break;
 				case 8 :
 						System.out.println("Afficher une catégorie : ");
-						articleRepository.findByCategoryId();
+						//articleRepository.findByCategoryId();
 					break;	
 				case 9 : 
 						System.out.println("Supprimer une categorie");
