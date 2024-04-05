@@ -30,7 +30,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String...args) throws Exception {
 		
-		//Ajouter des articles
+		/*//Ajouter des articles
 		Category pc = categoryRepository.save(new Category("pc"));
 		Category smartphone = categoryRepository.save(new Category ("smartphone"));
 		Category tablet = categoryRepository.save(new Category("tablet"));
@@ -41,7 +41,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		articleRepository.save(new Article("Apple", "iPadPro", 500, tablet));
 		articleRepository.save(new Article("Dell", "Latitude", 500, tablet));
 		articleRepository.save(new Article("Dell", "Insipron", 850, pc));
-		articleRepository.save(new Article("Motorola", "Moto E13", 100, smartphone));
+		articleRepository.save(new Article("Motorola", "Moto E13", 100, smartphone));*/
 		
 		
 		System.out.println("------------------------------------------------------- ");
@@ -57,17 +57,21 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 			switch(choice) {					
 				case 1 : 
 						System.out.println("Affichage de tous les articles sans pagination");
+						for(Article article : articleRepository.findAll()) {
+							System.out.println(article);
+						}
 					break;
 				case 2 : 
 						System.out.println("Affichage de tous les articles avec pagination");
 					break;	
 				case 3 : 
+					scan.nextLine();						
 						System.out.println("Ajouter un article");
 						System.out.println("Marque : "); String brandAdd = scan.nextLine();
 						System.out.println("Description : "); String descriptionAdd = scan.nextLine();
 						System.out.println("Prix : "); double priceAdd = scan.nextDouble();
-						System.out.println("Category : "); String categoryAdd = scan.nextLine();
-						Category cat = categoryAdd.equals("pc") ? pc : categoryAdd.equals("tablet") ? tablet : categoryAdd.equals("smartphone") ? smartphone : null;
+						System.out.println("Id de categorie : "); Long categoryId = scan.nextLong();
+						Category cat = categoryRepository.getById(categoryId);
 						articleRepository.save(new Article(brandAdd, descriptionAdd, priceAdd, cat));
 					break;					
 				case 4 : 
@@ -75,7 +79,6 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 						Long articleId = scan.nextLong();
 						Optional<Article> displayArticle = articleRepository.findById(articleId);
 						if(displayArticle.isPresent()) {
-							
 							System.out.println(displayArticle.get());
 						} else {
 							System.out.println("Cet id n'existe pas");
@@ -87,15 +90,40 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 						Optional<Article> articleToDelete = articleRepository.findById(articleIdtoDelete);
 						if(articleToDelete.isPresent()) {
 							articleRepository.deleteById(articleIdtoDelete);
-							System.out.println("L'article avec l'ID " + articleIdtoDelete+ "a été supprimé");
+							System.out.println("L'article avec l'ID " + articleIdtoDelete + "a été supprimé");
 						} else {
 							System.out.println("Aucun article trouvé avec l'id donné");
 						}
 					break;
 				case 6 : 
-					System.out.println("Modifier un article");
+					scan.nextLine();
+						System.out.println("Modifier un article");
+						Long articleIdtoModify = scan.nextLong();
+						Optional<Article> articleToModify = articleRepository.findById(articleIdtoModify);
+						if(articleToModify.isPresent()) {
+					        
+					        System.out.println("Entrez le nouvelle marque de l'article : ");
+					        String newBrand = scan.next();
+					        System.out.println("Entrez la nouvelle description de l'article : ");
+					        String newDescription = scan.next();
+					        System.out.println("Entrez le nouveau prix de l'article : ");
+					        double newPrice = scan.nextDouble();
+							
+							
+							
+							articleRepository.updateArticle(articleToModify.get().getId(), newBrand, newDescription, newPrice);
+						
+							 //articleRepository.save(articleToModify);
+						        System.out.println("L'article avec l'ID " + articleIdtoModify + " a été mis à jour avec succès.");
+						    
+		
+						} else {
+							System.out.println("Aucun article trouvé avec l'id donné");
+						}
+						
+					break;
 					
-				break;
+					
 				case 7 : 
 						System.out.println("Ajouter une categorie");
 					break;
@@ -142,14 +170,7 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 }
 
 		
-		
-		
-	
-		
-	
-	
-	
-		
+			
 		//categoryRepository.save(new Category("Smartphone"));
 		
 				//for(Article article : articleRepository.findByBrandAndPrice("Samsung", 250)) {
